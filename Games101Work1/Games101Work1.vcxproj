@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Games101Works\work1\Assignment1\代码框架\main.cpp" />
-    <ClCompile Include="..\..\..\Games101Works\work1\Assignment1\代码框架\rasterizer.cpp" />
-    <ClCompile Include="..\..\..\Games101Works\work1\Assignment1\代码框架\Triangle.cpp" />
+    <ClCompile Include="Resources\main.cpp" />
+    <ClCompile Include="Resources\rasterizer.cpp" />
+    <ClCompile Include="Resources\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Games101Works\work1\Assignment1\代码框架\rasterizer.hpp" />
-    <ClInclude Include="..\..\..\Games101Works\work1\Assignment1\代码框架\Triangle.hpp" />
+    <ClInclude Include="Resources\rasterizer.hpp" />
+    <ClInclude Include="Resources\Triangle.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Games101Works\work1\Assignment1\代码框架\rasterizer.cpp">
+    <ClCompile Include="Resources\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Games101Works\work1\Assignment1\代码框架\Triangle.cpp">
+    <ClCompile Include="Resources\rasterizer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Games101Works\work1\Assignment1\代码框架\main.cpp">
+    <ClCompile Include="Resources\Triangle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Games101Works\work1\Assignment1\代码框架\rasterizer.hpp">
+    <ClInclude Include="Resources\rasterizer.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Games101Works\work1\Assignment1\代码框架\Triangle.hpp">
+    <ClInclude Include="Resources\Triangle.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
