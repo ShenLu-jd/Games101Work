@@ -18,6 +18,16 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resources\global.hpp" />
+    <ClInclude Include="Resources\rasterizer.hpp" />
+    <ClInclude Include="Resources\Triangle.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Resources\main.cpp" />
+    <ClCompile Include="Resources\rasterizer.cpp" />
+    <ClCompile Include="Resources\Triangle.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -139,16 +149,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\Games101Works\work2\Assignment2\代码框架\main.cpp" />
-    <ClCompile Include="..\..\..\Games101Works\work2\Assignment2\代码框架\rasterizer.cpp" />
-    <ClCompile Include="..\..\..\Games101Works\work2\Assignment2\代码框架\Triangle.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\Games101Works\work2\Assignment2\代码框架\global.hpp" />
-    <ClInclude Include="..\..\..\Games101Works\work2\Assignment2\代码框架\rasterizer.hpp" />
-    <ClInclude Include="..\..\..\Games101Works\work2\Assignment2\代码框架\Triangle.hpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
