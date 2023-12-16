@@ -148,8 +148,6 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
             yMax = curY;
     }
 
-    Vector3f trangle = {};
-
     for (int x = (int)xMin; x <= xMax; ++x)
     {
         for (int y = (int)yMin; y <= yMax; ++y)
