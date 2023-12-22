@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Games101Work3", "Games101Wo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Games101Work4", "Games101Work4\Games101Work4.vcxproj", "{F3F1962A-39D1-41EB-A247-3077EBB10252}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Games101Work5", "Games101Work5\Games101Work5.vcxproj", "{2E00019D-0AC8-492B-936B-7517771857F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -50,6 +52,14 @@ Global
 		{F3F1962A-39D1-41EB-A247-3077EBB10252}.Release|x64.Build.0 = Release|x64
 		{F3F1962A-39D1-41EB-A247-3077EBB10252}.Release|x86.ActiveCfg = Release|Win32
 		{F3F1962A-39D1-41EB-A247-3077EBB10252}.Release|x86.Build.0 = Release|Win32
+		{2E00019D-0AC8-492B-936B-7517771857F1}.Debug|x64.ActiveCfg = Debug|x64
+		{2E00019D-0AC8-492B-936B-7517771857F1}.Debug|x64.Build.0 = Debug|x64
+		{2E00019D-0AC8-492B-936B-7517771857F1}.Debug|x86.ActiveCfg = Debug|Win32
+		{2E00019D-0AC8-492B-936B-7517771857F1}.Debug|x86.Build.0 = Debug|Win32
+		{2E00019D-0AC8-492B-936B-7517771857F1}.Release|x64.ActiveCfg = Release|x64
+		{2E00019D-0AC8-492B-936B-7517771857F1}.Release|x64.Build.0 = Release|x64
+		{2E00019D-0AC8-492B-936B-7517771857F1}.Release|x86.ActiveCfg = Release|Win32
+		{2E00019D-0AC8-492B-936B-7517771857F1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
