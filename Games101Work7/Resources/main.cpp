@@ -25,16 +25,35 @@ int main(int argc, char** argv)
     Material* light = new Material(DIFFUSE, (8.0f * Vector3f(0.747f+0.058f, 0.747f+0.258f, 0.747f) + 15.6f * Vector3f(0.740f+0.287f,0.740f+0.160f,0.740f) + 18.4f *Vector3f(0.737f+0.642f,0.737f+0.159f,0.737f)));
     light->Kd = Vector3f(0.65f);
 
-    MeshTriangle floor("../models/cornellbox/floor.obj", white);
-    MeshTriangle shortbox("../models/cornellbox/shortbox.obj", white);
-    MeshTriangle tallbox("../models/cornellbox/tallbox.obj", white);
-    MeshTriangle left("../models/cornellbox/left.obj", red);
-    MeshTriangle right("../models/cornellbox/right.obj", green);
-    MeshTriangle light_("../models/cornellbox/light.obj", light);
+    // 微表面材质
+    Material* mat_microfacet = new Material(MICROFACET, Vector3f(0.0f));
+    mat_microfacet->Kd = Vector3f(0.725f, 0.71f, 0.68f);
+    mat_microfacet->ior = 40.0f;    // 折射率
+
+    // 立方体的材质
+    //Material* box_mat = mat_microfacet;
+    Material* box_mat = white;
+
+    bool loadBox = false;
+
+    MeshTriangle floor("./models/cornellbox/floor.obj", white);
+    MeshTriangle shortbox("./models/cornellbox/shortbox.obj", box_mat);
+    MeshTriangle tallbox("./models/cornellbox/tallbox.obj", box_mat);
+    Sphere sphere(Vector3f(150, 100, 300), 100, box_mat);
+    MeshTriangle left("./models/cornellbox/left.obj", red);
+    MeshTriangle right("./models/cornellbox/right.obj", green);
+    MeshTriangle light_("./models/cornellbox/light.obj", light);
 
     scene.Add(&floor);
-    scene.Add(&shortbox);
-    scene.Add(&tallbox);
+    if (loadBox)
+    {
+        scene.Add(&shortbox);
+        scene.Add(&tallbox);
+    }
+    else
+    {
+        scene.Add(&sphere);
+    }
     scene.Add(&left);
     scene.Add(&right);
     scene.Add(&light_);

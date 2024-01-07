@@ -7,7 +7,7 @@
 
 #include "Vector.hpp"
 
-enum MaterialType { DIFFUSE};
+enum MaterialType { DIFFUSE, MICROFACET};
 
 class Material{
 private:
@@ -85,6 +85,35 @@ private:
         return a.x * B + a.y * C + a.z * N;
     }
 
+    // 法线分布函数 D(n,h,alpha), 业界主流使用的是GGX（Trowbridge-Reitz）
+    float DistributionGGX(Vector3f n, Vector3f h, float roughness)
+    {
+        float a = roughness * roughness, a2 = a * a;
+        float nh = std::max(dotProduct(n, h), 0.0f), nh2 = nh * nh;
+        float div = (nh2 * (a2 - 1.0) + 1.0);
+        div = M_PI * div * div;
+        return a2 / std::max(div, 0.0000001f); // 防止分母为 0
+    }
+
+    // 集合分布函数 G, UE4的方案是Schlick-GGX，即基于Schlick近似
+    float geometrySchlickGGX(float nv, float k)
+    {
+        float div = nv * (1.0 - k) + k;
+        return nv / div;
+    }
+
+    float geometrySmith(Vector3f n, Vector3f v, Vector3f l, float roughness)
+    {
+        float r = roughness + 1.0;
+        float k = (r * r) / 8.0f;
+        float nl = std::max(dotProduct(n, l), 0.0f);
+        float nv = std::max(dotProduct(n, v), 0.0f);
+        float ggx1 = geometrySchlickGGX(nl, k);
+        float ggx2 = geometrySchlickGGX(nv, k);
+        return ggx1 * ggx2;
+    }
+
+
 public:
     MaterialType m_type;
     //Vector3f m_color;
@@ -132,6 +161,7 @@ Vector3f Material::getColorAt(double u, double v) {
 Vector3f Material::sample(const Vector3f &wi, const Vector3f &N){
     switch(m_type){
         case DIFFUSE:
+        case MICROFACET:
         {
             // uniform sample on the hemisphere
             float x_1 = get_random_float(), x_2 = get_random_float();
@@ -148,6 +178,7 @@ Vector3f Material::sample(const Vector3f &wi, const Vector3f &N){
 float Material::pdf(const Vector3f &wi, const Vector3f &wo, const Vector3f &N){
     switch(m_type){
         case DIFFUSE:
+        case MICROFACET:
         {
             // uniform sample probability 1 / (2 * PI)
             if (dotProduct(wo, N) > 0.0f)
@@ -168,6 +199,43 @@ Vector3f Material::eval(const Vector3f &wi, const Vector3f &wo, const Vector3f &
             if (cosalpha > 0.0f) {
                 Vector3f diffuse = Kd / M_PI;
                 return diffuse;
+            }
+            else
+                return Vector3f(0.0f);
+            break;
+        }
+        //微表面材质的BRDF
+        case MICROFACET:
+        {
+            float cosa = dotProduct(N, wo);
+            if (cosa > 0.0f)
+            {
+                float roughness = 0.4f;
+                Vector3f v = -wi;
+                Vector3f l = wo;
+                Vector3f h = normalize(v + l);
+
+                float D = DistributionGGX(N, h, roughness);
+                float G = geometrySmith(N, v, l, roughness);
+
+                float F;
+                float etat = 1.85f;
+                fresnel(wi, N, etat, F);
+
+                Vector3f nominator = D * G * F;
+
+                float denominator = 4 * std::max(dotProduct(N, v), 0.0f) * std::max(dotProduct(N, l), 0.0f);
+                Vector3f specular = nominator / std::max(denominator, EPSILON);
+
+                // 能量守恒
+                float ks_ = F; // 反射比率
+                float kd_ = 1.0f - ks_; // 折射比率
+
+                Vector3f diffuse = 1.0f / M_PI; //漫反射系数
+
+                // 因为在 specular 项里已经考虑了反射部分的比例：F。所以反射部分不需要再乘以 ks_ 
+                //Ks为镜面反射项，Kd为漫反射项。
+                return  Ks * specular + kd_ * Kd * diffuse;
             }
             else
                 return Vector3f(0.0f);
