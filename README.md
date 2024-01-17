@@ -1,3 +1,7 @@
+# 第8次作业
+
+[第8次作业](https://github.com/ShenLu-jd/Games101Work8)
+
 # Games101作业VS环境配置
 
 ## 安装Eigen
